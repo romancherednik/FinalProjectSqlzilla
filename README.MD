@@ -59,6 +59,12 @@ I refer to [this guide](http://rogerdudler.github.io/git-guide/) in the video.
 
 You would do the init and remote parts on the VPS.
 
+Once your code is up on github, then you can use the `requirements.txt` to grab and install the required python packages.
+
 Otherwise, on VPS, we'll simply pull the code:
 
 * `git pull origin master`
+
+### Whitenoise
+
+Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for static file serving rather than what Antonio and Erin show.
