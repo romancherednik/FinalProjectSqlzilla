@@ -50,5 +50,6 @@ userpath==1.4.1
 virtualenv==20.1.0
 virtualenv-clone==0.5.4
 Werkzeug==1.0.1
+whitenoise==5.2.0
 wincertstore==0.2
 wrapt==1.12.1
