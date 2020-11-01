@@ -68,3 +68,8 @@ Otherwise, on VPS, we'll simply pull the code:
 ### Whitenoise
 
 Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for static file serving rather than what Antonio and Erin show.
+
+### Extras
+
+* I used the [favicon.io](https://favicon.io/favicon-generator/) site to generate a favicon.ico.
+* I referred to [this tutorial](https://learndjango.com/tutorials/django-favicon-tutorial) regarding the use of favicons.
