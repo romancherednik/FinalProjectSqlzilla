@@ -36,3 +36,29 @@ We also need to ensure that Nginx is set to go with Let's Encrypt prior to the G
 Acuity with web frontends is a course (or three) of its own, so I'll demonstrate finding a template that we can use.  For this, I have used the [Start Bootstrap](https://startbootstrap.com/) website, but there are many, many other sources for paid and free Boostrap 4 templates.  An alternative is [materialize](https://materializecss.com/), but there are many other CSS frameworks beyond these.
 
 Another approach is to use a tool like [Bootstrap Studio](https://www.bootstrapstudio.io/), but the template approach is even faster.
+
+In the video, I demonstrated these two:
+
+* [Blog Home Page](https://startbootstrap.com/templates/blog-home/)
+* [Blog Post Page](https://startbootstrap.com/templates/blog-post/)
+
+## Using Git for Deployment
+
+I refer to [this guide](http://rogerdudler.github.io/git-guide/) in the video.
+
+### Steps when you get started
+
+* Make a new repo on github
+* here are some of the suggested steps when you first make that repo:
+* these work both local and on vps:
+    * `git init` - only needed once 
+    * `git add -A` - do this everytime you want to push to github
+    * `git commit -m "some sensible and descriptive commit message describing why the codebase has changed"` - do this everytime you want to push to github
+    * `git remote add origin https://github.com/<your-account>/<your-repo>.git` - only needed once
+    * `git push -u origin master` - do this everytime you want to push to github
+
+You would do the init and remote parts on the VPS.
+
+Otherwise, on VPS, we'll simply pull the code:
+
+* `git pull origin master`
