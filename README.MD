@@ -28,3 +28,11 @@ We also need to ensure that Nginx is set to go with Let's Encrypt prior to the G
 
 * [How To Install Nginx on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
 * [How To Secure Nginx with Let's Encrypt on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04)
+
+## Finding a Bootstrap Blog Template
+
+[Bootstrap 4](https://getbootstrap.com/) is a convenient CSS framework that assists you in creating responsive and professional web frontends and pages easily.
+
+Acuity with web frontends is a course (or three) of its own, so I'll demonstrate finding a template that we can use.  For this, I have used the [Start Bootstrap](https://startbootstrap.com/) website, but there are many, many other sources for paid and free Boostrap 4 templates.  An alternative is [materialize](https://materializecss.com/), but there are many other CSS frameworks beyond these.
+
+Another approach is to use a tool like [Bootstrap Studio](https://www.bootstrapstudio.io/), but the template approach is even faster.
