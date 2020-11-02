@@ -44,7 +44,12 @@ In the video, I demonstrated these two:
 
 ## Using Git for Deployment
 
-I refer to [this guide](http://rogerdudler.github.io/git-guide/) in the video.
+I refer to [this guide](http://rogerdudler.github.io/git-guide/) in the video. It covers the basics likes:
+
+* starting your repo
+* adding and commiting code
+* pulling code
+* versioning with branches
 
 ### Steps when you get started
 
