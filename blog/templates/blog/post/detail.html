@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
 
@@ -25,53 +26,52 @@
     <hr>
     <!-- Post Content -->
     {{ post.body|linebreaks }}            
-
     <hr>
+
+    <h2>Similar posts</h2>
+    {% for post in similar_posts %}
+    <p>
+        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    </p>
+    {% empty %}
+    There are no similar posts yet.
+    {% endfor %}
+
+    {% with comments.count as total_comments %}
+        <h2>
+            {{ total_comments }} Comment{{ total_comments|pluralize }}
+        </h2>
+    {% endwith %}    
+    <!-- Single Comment -->
+    {% for comment in comments %}
+        <div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">    
+            <div class="media-body">
+                <h5 class="mt-0">Comment {{ forloop.counter }} by {{ comment.name }}</h5>
+                {{ comment.created }}            
+                {{ comment.body|linebreaks }}
+            </div>        
+        </div>
+        {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+
     <!-- Comments Form -->
     <div class="card my-4">
-        <h5 class="card-header">Leave a Comment:</h5>
-        <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="card-body">    
+        {% if new_comment %}
+            <h5 class="card-header">Your comment has been added.</h5>        
+        {% else %}
+            <h5 class="card-header">Leave a Comment:</h5>
+            <form class="form-group" method="post">
+                {{ comment_form | crispy }}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+                {% comment %} <p><input type="submit" value="Add comment"></p> {% endcomment %}
+                
             </form>
-        </div>
-    </div>
-    
-    <!-- Single Comment -->
-    <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-        </div>
-    </div>
-
-    <!-- Comment with nested comments -->
-    <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-            <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-
-            <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-
-            <div class="media mt-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                </div>
-            </div>
-        </div>
+        {% endif %}  
+        </div>        
     </div>    
 </div>
 {% endblock %}

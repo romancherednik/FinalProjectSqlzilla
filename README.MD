@@ -78,3 +78,4 @@ Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for 
 
 * I used the [favicon.io](https://favicon.io/favicon-generator/) site to generate a favicon.ico.
 * I referred to [this tutorial](https://learndjango.com/tutorials/django-favicon-tutorial) regarding the use of favicons.
+* I use [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) to help with including [Bootstrap 4](https://getbootstrap.com/).
