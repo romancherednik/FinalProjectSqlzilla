@@ -70,6 +70,11 @@ Otherwise, on VPS, we'll simply pull the code:
 
 * `git pull origin master`
 
+### Things to do on the server
+
+* run any migrations if you've updated them
+* consider restarting the gunicorn service
+
 ### Whitenoise
 
 Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for static file serving rather than what Antonio and Erin show.
