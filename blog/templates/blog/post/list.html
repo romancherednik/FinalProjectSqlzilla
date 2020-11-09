@@ -1,10 +1,11 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% block title %}My Blog{% endblock %}
 {% block content %}
 <!-- Blog Entries Column -->
 <div class="col-md-8">
     <h1 class="my-4">Buffteks
-        <small>Buffteks Blog</small>
+        <small>Technology musings for WT</small>
     </h1>
     {% if tag %}
     <h2>Posts tagged with "{{ tag.name }}"</h2>
@@ -30,7 +31,8 @@
                 {% endfor %}
             </p>
             <p class="card-text">
-                {{ post.body|truncatewords:30|linebreaks }}                        
+                {% comment %} {{ post.body|truncatewords:30|linebreaks }}{% endcomment %}
+                {{ post.body|markdown|truncatewords_html:30}}                
             </p>
             <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
         </div>

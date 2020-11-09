@@ -66,11 +66,17 @@ You would do the init and remote parts on the VPS.
 
 Once your code is up on github, then you can use the `requirements.txt` to grab and install the required python packages.
 
-Otherwise, on VPS, we'll simply pull the code:
+If you have updated your virtual environment with new or updated packages, ensure that you export them to `requirements.txt`:
+
+`pip freeze > requirements.txt`
+
+### Things to do on the server
+
+On VPS, we'll simply pull the code:
 
 * `git pull origin master`
 
-### Things to do on the server
+Also:
 
 * run any migrations if you've updated them
 * consider restarting the gunicorn service

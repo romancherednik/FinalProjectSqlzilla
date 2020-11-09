@@ -30,15 +30,17 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['buffteks.net', 'localhost', '127.0.0.1']
 
+SITE_ID = 1
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'crispy_forms',
     'blog.apps.BlogConfig',

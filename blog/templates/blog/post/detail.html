@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 {% load crispy_forms_tags %}
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
@@ -25,7 +26,8 @@
     
     <hr>
     <!-- Post Content -->
-    {{ post.body|linebreaks }}            
+    {% comment %} {{ post.body|linebreaks }} {% endcomment %}
+    {{ post.body|markdown }}    
     <hr>
 
     <h2>Similar posts</h2>
