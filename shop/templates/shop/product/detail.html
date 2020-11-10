@@ -1,5 +1,6 @@
 {% extends "shop/base.html" %}
 {% load static %}
+{% load humanize %}
 {% block title %}
   {{ product.name }}
 {% endblock %}
@@ -27,7 +28,7 @@
                             {{ product.category }}
                         </a>
                     </h4>
-                    <h4>${{ product.price }}</h4>
+                    <h4>${{ product.price|intcomma }}</h4>
                     <p class="card-text">
                         {{ product.description|linebreaks }}
                     </p>
