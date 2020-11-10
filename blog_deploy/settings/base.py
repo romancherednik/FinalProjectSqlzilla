@@ -42,10 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.postgres',    
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'whitenoise.runserver_nostatic',    
     'django.contrib.staticfiles',
     'crispy_forms',
-    'blog.apps.BlogConfig',
     'taggit',    
+    'blog.apps.BlogConfig',
+    'shop.apps.ShopConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,8 +139,13 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # STATICFILES_DIRS = ()
 
-# email stuff - using mailgun
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# MEDIA/UPLOADS
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# email stuff - using mailgun
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
