@@ -28,15 +28,17 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column">
     {% include "shop/navigation.html" %}
     <!-- Page Content -->
-    <div class="container">    
-        {% block content %}
-        {% endblock content %}
+    <div id="page-content">
+        <div class="container">
+            {% block content %}
+            {% endblock content %}
+        </div>    
     </div>
     <!-- /.container -->    
-    {% include "blog/footer.html" %}
+    {% include "shop/footer.html" %}
 
     <!-- jQuery and JS bundle w/ Popper.js -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" 
