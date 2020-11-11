@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'taggit',    
     'blog.apps.BlogConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'payment.apps.PaymentConfig',    
     'shop.apps.ShopConfig',
 ]
 
@@ -62,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',                
             ],
         },
     },
@@ -105,6 +108,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # MEDIA/UPLOADS
 MEDIA_URL = '/media/'
@@ -126,7 +130,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CART_SESSION_ID = 'cart'
 
 # braintree
-# Braintree settings
 BRAINTREE_MERCHANT_ID = os.getenv('BRAINTREE_MERCHANT_ID');     # Merchant ID
 BRAINTREE_PUBLIC_KEY = os.getenv('BRAINTREE_PUBLIC_KEY')        # Public Key
 BRAINTREE_PRIVATE_KEY = os.getenv('BRAINTREE_PRIVATE_KEY')      # Private key

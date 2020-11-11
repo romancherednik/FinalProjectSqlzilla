@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +17,6 @@
           crossorigin="anonymous">  
 
     <!-- Custom styles for this template -->
-    {% comment %} <link href="css/shop-homepage.css" rel="stylesheet"> {% endcomment %}
-
     <link href="{% static "css/shop.css" %}" rel="stylesheet">
 
     {% comment %} Favicon built with: https://favicon.io/favicon-generator/ {% endcomment %}
@@ -35,9 +33,29 @@
         <div class="container">
             {% block content %}
             {% endblock content %}
-        </div>    
+        </div>
+        <!-- /.container -->
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-2">
+                    {% with total_items=cart|length %}
+                        {% if total_items > 0 %}
+                            <p>
+                                <span class="badge badge-secondary">Your cart:</span>
+                                <a href="{% url "cart:cart_detail" %}">
+                                    {{ total_items }} item{{ total_items|pluralize }},
+                                    ${{ cart.get_total_price|intcomma }}
+                                </a>                    
+                            </p> 
+                        {% else %}
+                            <p> <span class="badge badge-secondary">Your cart is empty.</span></p>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>        
+        </div>
+        <!-- /.container -->        
     </div>
-    <!-- /.container -->    
     {% include "shop/footer.html" %}
 
     <!-- jQuery and JS bundle w/ Popper.js -->
@@ -50,5 +68,11 @@
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" 
             crossorigin="anonymous">
     </script>  
+    <script>
+        //tooltip init
+        $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        })        
+    </script>
 </body>
 </html>

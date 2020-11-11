@@ -1,0 +1,63 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+    Your shopping cart
+{% endblock %}
+{% block content %}
+    <h1>Your shopping cart</h1>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Remove</th>
+                <th scope="col">Unit price</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in cart %}
+        {% with product=item.product %}
+            <tr scope="row">
+                <td>
+                    <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.image %}{{ product.image.url }}
+                        {% else %}{% static "img/no_image.png" %}{% endif %}">
+                    </a>
+                </td>
+                <td>{{ product.name }}</td>
+                <td>
+                    <form action="{% url "cart:cart_add" product.id %}" method="post">
+                        {{ item.update_quantity_form.quantity }}
+                        {{ item.update_quantity_form.override }}
+                        <input class="btn btn-primary" type="submit" value="Update">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                        <input class="btn btn-primary" type="submit" value="Remove">
+                        {% csrf_token %}
+                    </form>
+                </td>
+                <td class="num">${{ item.price|intcomma }}</td>
+                <td class="num">${{ item.total_price }}</td>
+            </tr>
+        {% endwith %}
+        {% endfor %}
+            <tr class="table-active" scope="row" class="total">
+                <td>Total</td>
+                <td colspan="4"></td>
+                <td class="num">${{ cart.get_total_price|intcomma }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p class="text-right">
+        <a href="{% url "shop:product_list" %}" class="btn btn-info">Continue shopping</a>
+        <a href="{% url "orders:order_create" %}" class="btn btn-info">
+            Checkout
+        </a>
+    </p>
+{% endblock %}

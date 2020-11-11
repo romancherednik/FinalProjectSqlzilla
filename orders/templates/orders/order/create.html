@@ -1,0 +1,39 @@
+{% extends "shop/base.html" %}
+{% load crispy_forms_tags %}
+{% load humanize %}
+{% block title %}
+  Checkout
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-8">
+            <h1>Checkout</h1>
+            <form method="post" class="order-form">
+                {% comment %} using django crispy forms for this filter
+                https://django-crispy-forms.readthedocs.io/en/latest/index.html {% endcomment %}
+                {{ form|crispy }}
+                <p>
+                    <input class="btn btn-primary" 
+                           data-toggle="tooltip" 
+                           data-placement="right" 
+                           title="Get your stuff"                    
+                           type="submit" 
+                           value="Place order">
+                </p>
+                {% csrf_token %}
+            </form>
+        </div>
+        <div class="col-4">
+            <h3>Your order</h3>
+            <ul>
+                {% for item in cart %}
+                    <li>
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>${{ item.total_price|intcomma }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p>Total: ${{ cart.get_total_price|intcomma }}</p>
+        </div>        
+    </div>
+{% endblock %}
