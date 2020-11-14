@@ -81,6 +81,8 @@ take note that when you use this settings approach, you can always use the `--se
 
 `manage.py runserver --settings=educa.settings.local`
 
+Or, you are expected to configure the [DJANGO_SETTINGS_MODULE environment variable](https://docs.djangoproject.com/en/3.1/topics/settings/#designating-the-settings)
+
 ### Things to do on the server
 
 On VPS, we'll simply pull the code:
