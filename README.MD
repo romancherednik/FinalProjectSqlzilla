@@ -70,6 +70,17 @@ If you have updated your virtual environment with new or updated packages, ensur
 
 `pip freeze > requirements.txt`
 
+## Managing settings
+
+Antonio covers the need to manage settings differently depending on what stage of development your application is at.  As such, we establish different settings files to be used conditionally depending on the current environment:
+
+* Development/Local
+* Production (deployed to VPS)
+
+take note that when you use this settings approach, you can always use the `--settings` switch for the `manage.py` command:
+
+`manage.py runserver --settings=educa.settings.local`
+
 ### Things to do on the server
 
 On VPS, we'll simply pull the code:
