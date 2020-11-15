@@ -100,8 +100,13 @@ Also:
 
 Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for static file serving rather than what Antonio and Erin show.
 
+### Serving Media Files (uploads)
+
+Despite the availability of [Whitenoise](http://whitenoise.evans.io/en/stable/), we still need to use nginx or [Django Storages](https://django-storages.readthedocs.io/en/latest/) to go that last mile of serving and accepting media files.
+
 ### Extras
 
 * I used the [favicon.io](https://favicon.io/favicon-generator/) site to generate a favicon.ico.
 * I referred to [this tutorial](https://learndjango.com/tutorials/django-favicon-tutorial) regarding the use of favicons.
 * I use [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) to help with including [Bootstrap 4](https://getbootstrap.com/).
+* I use the built-in [humanize](https://docs.djangoproject.com/en/3.1/ref/contrib/humanize/) filter to make numbers more readable.
