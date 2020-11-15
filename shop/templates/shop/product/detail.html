@@ -21,6 +21,7 @@
         <div class="col-lg-9">
             <div class="card mt-4">
                 <img class="card-img-top img-fluid" 
+                     {% comment %} documentation of url: https://docs.djangoproject.com/en/3.1/ref/models/fields/#django.db.models.FileField.storage {% endcomment %}
                      src="{% if product.image %}{{ product.image.url }}{% else %}http://placehold.it/900x400{% endif %}"
                      alt="{{ product.image }}">
                 <div class="card-body">
