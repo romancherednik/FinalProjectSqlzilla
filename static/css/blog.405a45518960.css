@@ -1,0 +1,32 @@
+/*!
+ * Start Bootstrap - Shop Item (https://startbootstrap.com/template/shop-item)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-shop-item/blob/master/LICENSE)
+ */
+
+/* Flexbox Sticky Footer: https://startbootstrap.com/snippets/sticky-footer-flexbox */
+/* Sticky Footer Classes */
+html,
+body {
+    height: 100%;
+}
+
+body {
+  padding-top: 56px;
+}
+
+#page-content {
+  flex: 1 0 auto;
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
+
+/* Other Classes for Page Styling */
+
+/* body {
+  background: #007bff;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+} */
+  
