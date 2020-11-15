@@ -21,7 +21,7 @@
         <div class="col-lg-9">
             <div class="card mt-4">
                 <img class="card-img-top img-fluid" 
-                     src="{% if product.image %}{{ MEDIA_URL }}{{ product.image }}{% else %}http://placehold.it/900x400{% endif %}"
+                     src="{% if product.image %}/{{ MEDIA_URL }}{{ product.image }}{% else %}http://placehold.it/900x400{% endif %}"
                      alt="{{ product.image }}">
                 <div class="card-body">
                     <h3 class="card-title">{{product.name}}</h3>
