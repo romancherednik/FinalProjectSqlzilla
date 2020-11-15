@@ -1,7 +1,7 @@
 from os import environ
 from . base import *
 
-ALLOWED_HOSTS = ['buffteks.net', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['buffteks.net', 'www.buffteks.net', 'localhost', '127.0.0.1']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

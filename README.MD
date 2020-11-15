@@ -96,6 +96,10 @@ Also:
 * run any migrations if you've updated them
 * consider restarting the gunicorn service
 
+### WeasyPrint
+
+The PDF handling in WeasyPrint requires [additional package installations on Ubuntu](https://weasyprint.readthedocs.io/en/stable/install.html#debian-ubuntu).
+
 ### Whitenoise
 
 Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for static file serving rather than what Antonio and Erin show.
