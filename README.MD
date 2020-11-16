@@ -96,6 +96,23 @@ Also:
 * run any migrations if you've updated them
 * consider restarting the gunicorn service
 
+### Nginx to serve and facilitate /media/
+
+The best solution for media files, which is where user uploads will go, is to follow Erin Glass' lead and use nginx.  Here is a part of my site config file in `/etc/nginx/sites-available`:
+
+This directive specifies that nginx should serve files from the `media` folder:
+
+```
+location /media {
+        autoindex on;
+        alias /home/jeff/buffteksdir/media/;
+}
+```
+
+This should go right below the `server_name` directive in the file.
+
+
+
 ### WeasyPrint
 
 The PDF handling in WeasyPrint requires [additional package installations on Ubuntu](https://weasyprint.readthedocs.io/en/stable/install.html#debian-ubuntu).
