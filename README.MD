@@ -111,6 +111,7 @@ location /media {
 
 This should go right below the `server_name` directive in the file.
 
+The `alias` should actually go to where you have your application installed.
 
 
 ### WeasyPrint
