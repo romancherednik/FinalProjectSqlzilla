@@ -229,3 +229,21 @@ Now, you'll be pushing changes to two repositories:
 * `git push heroku master` for deployment to Heroku
 
 **NOTE**: There is a effort underway to change nomenclature of the default root branch in git from **master** to **main**.  As you encounter tutorials and articles, consider these to inchangeable from a functional perspective.  While ultimately, there are no code-functional differences, you can change the name of the **master** branch to **main**. Steps on how to do so, and the background as to why this phenomenon has arisen, are covered in [this article](https://www.kapwing.com/blog/how-to-rename-your-master-branch-to-main-in-git/).
+
+### Console Access
+
+What is very handy is your ability to quickly start a console sesion using the Heroku CLI.  This could be useful to run `python manage.py shell` or any other `manage.py` task.  
+
+`heroku run python manage.py shell`
+
+Further, you can get a `bash` shell going.
+
+`heroku run bash`
+
+### Working with the Database
+
+Postgres is the preferred RDBMS for Django and your deployment would have created the database for you.  However, Heroku provides options to work with the database using the `heroku pg` command.  Further, your database is accessible via `https://<your-app-name>.herokuapp.com/db`. 
+
+It will be neccessary to use remote console access to run things like migrations: `heroku run python manage.py migrate`
+
+Lastly, you can get a database prompt directly using `heroku pg:psql` in order to issue queries and otherwise check on things directly.  Take care that you don't mangle the schemas or your migrations will be out of sync and your app and/or data will be broken.
