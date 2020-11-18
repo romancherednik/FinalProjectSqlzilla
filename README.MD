@@ -191,7 +191,9 @@ The Heroku tutorial jumps straight into deploying their demo app, but that is a 
 
 ## Config
 
-Either though the web dashboard, or through the CLI, you won't be placing a .env file on heroku like you would your VPS.  Rather, you set `config vars` (really just environment variables) for Heroku to read.  This part of the Heroku documentation discusses this further: [Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars)
+Either though the web dashboard, or through the CLI, you won't be placing a .env file on heroku like you would your VPS.  Rather, you set `config vars` (really just environment variables) for Heroku to read.  This part of the Heroku documentation discusses this further: [Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars).
+
+**NOTE!!!**: Most of your config variables must be in place prior to attempting a deployment.  Without variables like the secret key, you will not be able to successfully deploy.
 
 ## Deployment
 
@@ -247,3 +249,9 @@ Postgres is the preferred RDBMS for Django and your deployment would have create
 It will be neccessary to use remote console access to run things like migrations: `heroku run python manage.py migrate`
 
 Lastly, you can get a database prompt directly using `heroku pg:psql` in order to issue queries and otherwise check on things directly.  Take care that you don't mangle the schemas or your migrations will be out of sync and your app and/or data will be broken.
+
+## Application Error
+
+Before you celebrate, you'll often see "Application Error" when, despite your app working locally, your app fails to run in deployment.
+
+Fortunately, you'll get the correct advise on the error page in the browser.  That advice is to run `heroku logs --tail`

@@ -1,1 +1,1 @@
-web: gunicorn buffteks.wsgi --log-file -
+web: gunicorn blog_deploy.wsgi --log-file -
