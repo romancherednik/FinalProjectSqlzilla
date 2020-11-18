@@ -174,6 +174,7 @@ The Heroku tutorial jumps straight into deploying their demo app, but that is a 
 * Also, ensure that we have an up-to-date `requirements.txt` file: `pip freeze > requirements.txt` (this file should exist alongside `manage.py` in your project folder)
 * Heroku also needs a `Procfile` to help instruct Heroku on what to do with your application.  Put the following in that file:
     * `web: gunicorn <name-of-your-project>.wsgi --log-file -`
+    * for those of us on windows, also include a `Profile.windows` file that contains this: `web: python manage.py runserver 0.0.0.0:5000`
 * `Runtime.txt` file is used to specify the version of Python you want running: `python-3.8.6` for instance
 * Modifying your project's `settings.py` file:
     * `DEBUG=False`
@@ -188,6 +189,10 @@ The Heroku tutorial jumps straight into deploying their demo app, but that is a 
     ```
     * Optionally, update database settings to use `dj_database_url`
 
+## Config
+
+Either though the web dashboard, or through the CLI, you won't be placing a .env file on heroku like you would your VPS.  Rather, you set `config vars` (really just environment variables) for Heroku to read.  This part of the Heroku documentation discusses this further: [Configuration and Config Vars](https://devcenter.heroku.com/articles/config-vars)
+
 ## Deployment
 
 The steps to deploy are actually very straightforward with Heroku.  All of the necessary steps are accomplished with the Heroku CLI.
@@ -196,4 +201,31 @@ The steps to deploy are actually very straightforward with Heroku.  All of the n
 * Create app container: `heroku create <name-of-app>`
     * The heroku tutorial has you draw a random name, but you can specify a name.  
     * Your app will be deployed to a url like this: `https://<name-of-app>.herokuapp.com`
-* 
+
+## Running Locally
+
+What is nice about the Heroku CLI is that you can emulate how your app will (or won't) work on Heroku byy using the Heroku CLI's `local web` option:
+
+On Windows: `heroku local web -f Profile.windows`
+On Mac/Linux: `heroku local web`
+
+### Media Files and Heroku
+
+While Whitenoise will handle static files, you'll still have an issue with the `media` files (user uploads) and this is a painful achilles heel of Django.  
+
+#### Ephemeral FileSystem
+
+Initially, you might think that your uploads work, but you'll notice that the entire filesystem that hosts your Heroku app will be wiped out daily - moreso if you remain on free levels of service.  
+
+Heroku recommends using [AWS S3](https://aws.amazon.com/s3/), but you could also use [Digital Ocean](https://www.digitalocean.com/products/spaces/) or [Linode](https://www.linode.com/products/object-storage/).  Of course this means maintaining separate accounts with multiple services, but that too is a fact of life in application deployment.  Honestly, [AWS](https://aws.amazon.com/) is something you want to learn eventually, but it is its own ball of wax.
+
+There are also static files addons available, you are again getting into more paid territory.  Much as the case with ecosystems like [WordPress](https://wordpress.org/), you'll find that the deeper you go, the more there is to pay for. This is why I started you out on the VPS route: if you are willing to learn the details, you can stay at the $5/month level with a DIY approach.
+
+### Pushing Changes
+
+Now, you'll be pushing changes to two repositories:
+
+* `git push -u origin master` to go to Github
+* `git push heroku master` for deployment to Heroku
+
+**NOTE**: There is a effort underway to change nomenclature of the default root branch in git from **master** to **main**.  As you encounter tutorials and articles, consider these to inchangeable from a functional perspective.  While ultimately, there are no code-functional differences, you can change the name of the **master** branch to **main**. Steps on how to do so, and the background as to why this phenomenon has arisen, are covered in [this article](https://www.kapwing.com/blog/how-to-rename-your-master-branch-to-main-in-git/).
