@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-from django.conf import settings
-from django.urls import reverse_lazy
 from pathlib import Path
 
+from django.conf import settings
+from django.urls import reverse_lazy
+
 import braintree
+import dj_database_url
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -32,7 +34,7 @@ DEBUG = False
 if settings.DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['buffteks.net', 'www.buffteks.net', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['buffteks.net', 'www.buffteks.net', '.herokuapp.com', 'localhost', '127.0.0.1']
 
 SITE_ID = 1
 
@@ -83,6 +85,10 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT'),
     }
 }
+
+# this is from dj_database_url and is optional but more succinct
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
 
 ROOT_URLCONF = 'blog_deploy.urls'
 
@@ -146,6 +152,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # MEDIA/UPLOADS
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# WHITENOISE
+
+# Optionally, we can compress static files with Whitenoise
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# Also, we can have Whitenoise look for static files in each app rather than running collectstatic
+# WHITENOISE_USE_FINDERS = True
 
 # email stuff - using mailgun
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

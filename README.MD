@@ -1,12 +1,12 @@
 # Blog Template and Deployment
 
-This project has been created in support of Assignment 7.5, centering on deployment.
+This project has been created in support of Assignment 7.5, centering on deployment.  Further, this has been extended to assist with your final project.
 
-A significant part of this tutorial is based on [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04), written by [Erin Glass](https://www.digitalocean.com/community/users/eglass).
+A significant part of this tutorial is based on [How To Set Up Django with Postgres, Nginx, and Gunicorn on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04), written by [Erin Glass](https://www.digitalocean.com/community/users/eglass).  There are also elements from Antonio's Chapter 14 that are useful as well.
 
-Showing some steps on:
-* how to select a [Bootstrap 4](https://getbootstrap.com/) [template](https://startbootstrap.com/templates/blog-home)
-* steps for deployment
+In this project, I show some steps regarding:
+* How to select a [Bootstrap 4](https://getbootstrap.com/) [template](https://startbootstrap.com/templates/blog-home)
+* Deployment to our VPS
 
 ## Preparing for Deployment
 
@@ -16,13 +16,13 @@ For our purposes here, the first three steps in Erin's tutorial should be follow
 * [Creating the PostgreSQL Database and User](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04#creating-the-postgresql-database-and-user)
 * [Creating a Python Virtual Environment for your Project](https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-20-04#creating-a-python-virtual-environment-for-your-project)
 
-However, we do not need to start a new django project as we have one in source control.  However, it would be best if the project were located outside of a combined repository.  Either way will work, however.
+However, we do not need to start a new django project as we have one in source control.  Also, it would be best if the project were located outside of a combined repository.  Either way will work, however.
 
 ## Ensuring our domain name is associated with our servers
 
-In Digital Ocean's cloud dashboard, you go to networking and associate your domain with your droplet.  At your domain registrar, you provide the nameserver information.
+In Digital Ocean's cloud dashboard, you go to networking and associate your domain with your droplet.  At your domain registrar, you provide the nameserver information. This is necessary for SSL to work and a requirement of the deployed final project.
 
-## Ensuring nginx is set for TLS/SSL
+## Ensuring Nginx is set for TLS/SSL
 
 We also need to ensure that Nginx is set to go with Let's Encrypt prior to the Gunicorn work with Django:
 
@@ -83,24 +83,20 @@ take note that when you use this settings approach, you can always use the `--se
 
 manage.py runserver --settings=blog_deploy.settings.local
 
-Or, you are expected to configure the [DJANGO_SETTINGS_MODULE environment variable](https://docs.djangoproject.com/en/3.1/topics/settings/#designating-the-settings)
+Or, you are expected to configure the [DJANGO_SETTINGS_MODULE environment variable](https://docs.djangoproject.com/en/3.1/topics/settings/#designating-the-settings).  You can stick to the original approach and just use a single `settings.py` file as well.
 
 ### Things to do on the server
 
-On VPS, we'll simply pull the code:
+Now, to get the code runing on the VPS, we'll simply pull the code:
 
 * `git pull origin master`
-
-Also:
-
 * run any migrations if you've updated them
-* consider restarting the gunicorn service
+* run `python manage.py collectstatic`
+* Restart the gunicorn and nginx services
 
 ### Nginx to serve and facilitate /media/
 
-The best solution for media files, which is where user uploads will go, is to follow Erin Glass' lead and use nginx.  Here is a part of my site config file in `/etc/nginx/sites-available`:
-
-This directive specifies that nginx should serve files from the `media` folder:
+The best solution for media files, which is where user uploads will go, is to follow Erin Glass' lead and use Nginx.  Here is a part of my site config file in `/etc/nginx/sites-available`:
 
 ```
 location /media {
@@ -108,11 +104,11 @@ location /media {
         alias /home/jeff/buffteksdir/media/;
 }
 ```
+This directive specifies that nginx should serve files from the `media` folder.
 
 This should go right below the `server_name` directive in the file.
 
-The `alias` should actually go to where you have your application installed.
-
+The `alias` should actually go to where you have your application installed.  For static
 
 ### WeasyPrint
 
@@ -124,7 +120,7 @@ Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for 
 
 ### Serving Media Files (uploads)
 
-Despite the availability of [Whitenoise](http://whitenoise.evans.io/en/stable/), we still need to use nginx or [Django Storages](https://django-storages.readthedocs.io/en/latest/) to go that last mile of serving and accepting media files.
+Despite the availability of [Whitenoise](http://whitenoise.evans.io/en/stable/), we still need to use nginx or [Django Storages](https://django-storages.readthedocs.io/en/latest/) to go that last mile of serving and accepting media files.  I have mentioned this previously.
 
 ### REMEMBER TO CREATE A .ENV FILE ON THE SERVER
 
@@ -138,3 +134,66 @@ This is what I used in this project:
 * I referred to [this tutorial](https://learndjango.com/tutorials/django-favicon-tutorial) regarding the use of favicons.
 * I use [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/) to help with including [Bootstrap 4](https://getbootstrap.com/).
 * I use the built-in [humanize](https://docs.djangoproject.com/en/3.1/ref/contrib/humanize/) filter to make numbers more readable.
+
+# The Heroku Alternative
+
+While I felt it important to show you a fully controlled and **manual** way to get deployed on a VPS that you fully control, it is also possible to use a [Platform as a Service](https://en.wikipedia.org/wiki/Platform_as_a_service) provided for deployment, such as [Heroku](https://devcenter.heroku.com/start), [AWS](https://aws.amazon.com/), or [PythonAnywhere](https://www.pythonanywhere.com/).
+
+I will show steps for Heroku.  
+
+**NOTE**: If, after you review these steps and utilize this deployment strategy, I will withold some of the **VPS** points allocated for the project as that was an explicit requirements.  However, it may be that this PaaS route becomes your only viable solution.
+
+I will generally follow the steps in [this resource](https://devcenter.heroku.com/articles/getting-started-with-python), although it seems to be a slight bit out of date.
+
+## Pre-Requisites
+
+You need to have the following in place:
+
+* [Obtain a Heroku account](https://signup.heroku.com/dc). You start at a free tier.
+* Have python installed locally
+* Have Postgres installed locally
+
+## Heroku CLI
+
+We'll want to use the [Heroku CLI utility](https://devcenter.heroku.com/articles/getting-started-with-python#set-up) for heroku deployment.
+
+To get going, you type: `heroku login`
+
+At the terminal.
+
+## Getting Started
+
+Heroku provides a barebones [Django starter app](https://github.com/heroku/python-getting-started) to work with, but we already have an app.  As such, we'll follow their steps without actually cloning their app.  That said, it might be a good idea to work through their tutorial entirely as a dry run.
+
+## Before you Create the App
+
+The Heroku tutorial jumps straight into deploying their demo app, but that is a very simple example.  There are some things we'll want to do first:
+
+* First, we'll want to double-check that, in addition to Django, and all the other packages we've used with Antonio, that we have the following packages:
+    * `pip install dj-database-url gunicorn whitenoise`
+* Also, ensure that we have an up-to-date `requirements.txt` file: `pip freeze > requirements.txt` (this file should exist alongside `manage.py` in your project folder)
+* Heroku also needs a `Procfile` to help instruct Heroku on what to do with your application.  Put the following in that file:
+    * `web: gunicorn <name-of-your-project>.wsgi --log-file -`
+* `Runtime.txt` file is used to specify the version of Python you want running: `python-3.8.6` for instance
+* Modifying your project's `settings.py` file:
+    * `DEBUG=False`
+    * Change allowed hosts: `ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']`
+    * Disable Django’s static file handling, allowing WhiteNoise to handle static files:
+    ```
+    INSTALLED_APPS = [
+        'whitenoise.runserver_nostatic',
+        'django.contrib.staticfiles',
+        # ...
+    ]
+    ```
+    * Optionally, update database settings to use `dj_database_url`
+
+## Deployment
+
+The steps to deploy are actually very straightforward with Heroku.  All of the necessary steps are accomplished with the Heroku CLI.
+
+* Make sure you commit and push to Github first.
+* Create app container: `heroku create <name-of-app>`
+    * The heroku tutorial has you draw a random name, but you can specify a name.  
+    * Your app will be deployed to a url like this: `https://<name-of-app>.herokuapp.com`
+* 

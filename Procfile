@@ -1,0 +1,1 @@
+web: gunicorn buffteks.wsgi --log-file -
