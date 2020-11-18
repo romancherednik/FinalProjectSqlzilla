@@ -126,6 +126,12 @@ Bear in mind that I use [Whitenoise](http://whitenoise.evans.io/en/stable/) for 
 
 Despite the availability of [Whitenoise](http://whitenoise.evans.io/en/stable/), we still need to use nginx or [Django Storages](https://django-storages.readthedocs.io/en/latest/) to go that last mile of serving and accepting media files.
 
+### REMEMBER TO CREATE A .ENV FILE ON THE SERVER
+
+This is what I used in this project:
+
+![Blog Deploy ENV](https://i.imgur.com/v9WE8Lg.png)
+
 ### Extras
 
 * I used the [favicon.io](https://favicon.io/favicon-generator/) site to generate a favicon.ico.
