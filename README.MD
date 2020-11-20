@@ -108,7 +108,15 @@ This directive specifies that nginx should serve files from the `media` folder.
 
 This should go right below the `server_name` directive in the file.
 
-The `alias` should actually go to where you have your application installed.  For static
+The `alias` should actually go to where you have your application installed.  
+
+### DATABASE_URL
+
+Another way to provide connection information for Postgres is using a database url:
+
+`DATABASE_URL=postgres://DB_USER:DB_PASS@DB_HOST:DB_PORT/DB_NAME`
+
+Above is the variable you put into .env and the elements of authentication that you place into each part.
 
 ### WeasyPrint
 
