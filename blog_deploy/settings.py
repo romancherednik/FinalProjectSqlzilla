@@ -27,14 +27,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '!nz^f3aos(cyr*q#zqs+se)u$-7-ars)lr#n71%dm0*o2#!48u'
 
 DEBUG = True
 
 if settings.DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['buffteks.net', 'www.buffteks.net', '.herokuapp.com', 'localhost', '127.0.0.1']
+    ALLOWED_HOSTS = ['www.sqlzilla.xyz', 'sqlzilla.xyz', '.herokuapp.com', 'localhost', '127.0.0.1']
 
 SITE_ID = 1
 
@@ -76,8 +76,17 @@ MIDDLEWARE = [
 # this is from dj_database_url and is optional but more succinct
 
 # clear out defaults
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+#DATABASES = {}
+#DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'blog',
+        'USER': 'blog',
+        'PASSWORD': 'IZrail92a',
+    }
+}
+
 
 ROOT_URLCONF = 'blog_deploy.urls'
 

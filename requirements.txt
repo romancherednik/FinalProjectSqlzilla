@@ -63,7 +63,6 @@ urllib3==1.26.2
 userpath==1.4.1
 virtualenv==20.1.0
 virtualenv-clone==0.5.4
-WeasyPrint==52.1
 webencodings==0.5.1
 Werkzeug==1.0.1
 whitenoise==5.2.0

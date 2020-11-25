@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title> {% block title %}Shop Homepage{% endblock title %} </title> 
+    <title> {% block title %}SQL Consulting Services Page{% endblock title %} </title> 
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" 
@@ -41,14 +41,14 @@
                     {% with total_items=cart|length %}
                         {% if total_items > 0 %}
                             <p>
-                                <span class="badge badge-secondary">Your cart:</span>
+                                <span class="badge badge-secondary">Your SQLzilla cart:</span>
                                 <a href="{% url "cart:cart_detail" %}">
                                     {{ total_items }} item{{ total_items|pluralize }},
                                     ${{ cart.get_total_price|intcomma }}
                                 </a>                    
                             </p> 
                         {% else %}
-                            <p> <span class="badge badge-secondary">Your cart is empty.</span></p>
+                            <p> <span class="badge badge-secondary">Your SQLzilla cart is empty.</span></p>
                         {% endif %}
                     {% endwith %}
                 </div>
